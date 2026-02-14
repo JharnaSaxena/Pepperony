@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>your jar is ready 💕</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="pink-world">
+
+<iframe id="bgMusic1" src="https://www.youtube.com/embed/0zoEjHwOUgo?autoplay=0&loop=1&playlist=0zoEjHwOUgo" style="display:none;" allow="autoplay"></iframe>
+<iframe id="bgMusic2" src="https://www.youtube.com/embed/CpbJO2Z6DA4?autoplay=0&loop=1&playlist=CpbJO2Z6DA4" style="display:none;" allow="autoplay"></iframe>
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+<div class="rain-hearts" id="rainHearts"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<div class="container">
+    <div class="hero">
+        <div class="jar-bounce">🫙💕</div>
+        <h1>your jar is ready</h1>
+        <p class="subtitle">now send it to {{ receiver }}.<br>and wait. waiting is the hard part. 🌸</p>
+        <div class="hearts-row">💗 🌸 💕 ✨ 💗 🌸 💕</div>
+    </div>
+
+    <div class="form-card">
+        <div class="card-deco top">💗 · · · 💗</div>
+        <p style="color:#a44a65;font-size:0.95rem;margin-bottom:1rem;">share this link with {{ receiver }}:</p>
+        <div class="link-box">
+            <input type="text" id="shareLinkInput" value="{{ link }}" readonly>
+            <button class="copy-btn" id="copyLinkBtn" onclick="copyLink()">copy 💗</button>
+        </div>
+        <div class="steps-list">
+            <p><span class="step-num">1</span> {{ receiver }} opens the link</p>
+            <p><span class="step-num">2</span> they click the jar. a letter floats out. 💌</p>
+            <p><span class="step-num">3</span> they send a 🐻 back — you'll know when they do</p>
+        </div>
+        <div class="divider">💕 waiting 💕</div>
+        <div id="bearStatus" data-code="{{ link.split('/')[-1] }}" class="bear-status-box">
+            <p style="color:#a44a65;font-style:italic;font-size:0.92rem;">{{ receiver }} hasn't opened it yet<span class="waiting-dots"></span></p>
+        </div>
+        <div id="replyStatus" data-code="{{ link.split('/')[-1] }}" class="bear-status-box" style="margin-top:0.8rem;">
+            <p style="color:#a44a65;font-style:italic;font-size:0.92rem;">no reply yet<span class="waiting-dots"></span></p>
+        </div>
+        <a href="/" class="btn" style="margin-top:1.2rem;display:block;padding:0.8rem 1.8rem;font-size:0.95rem;text-decoration:none;text-align:center;">make another jar 🫙</a>
+        <div class="card-deco bottom">💕 · · · 💕</div>
+    </div>
+
+    <div class="footer">
+        <p>some messages take time. it's okay to wait. 🌙</p>
+        <p><a href="/secret">· · ·</a></p>
+    </div>
+</div>
+
+<style>
+body.pink-world{background:linear-gradient(160deg,#ffe0ec 0%,#ffc2d4 30%,#ffb3c6 60%,#ff8fab 100%);min-height:100vh;color:#6b1a30;font-family:'DM Sans',sans-serif;}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:0.5;}
+.blob1{width:400px;height:400px;background:#ff8fab;top:-100px;left:-100px;animation:blobMove 8s ease-in-out infinite;}
+.blob2{width:350px;height:350px;background:#ffccd5;bottom:-80px;right:-80px;animation:blobMove 10s ease-in-out infinite reverse;}
+.blob3{width:250px;height:250px;background:#ff4d6d;top:50%;left:50%;transform:translate(-50%,-50%);animation:blobMove 12s ease-in-out infinite 2s;}
+@keyframes blobMove{0%,100%{transform:scale(1) translate(0,0);}33%{transform:scale(1.1) translate(20px,-20px);}66%{transform:scale(0.95) translate(-15px,15px);}}
+.music-btn{position:fixed;top:16px;right:16px;z-index:100;background:rgba(255,255,255,0.7);border:2px solid #ff8fab;border-radius:22px;width:44px;height:44px;font-size:1.2rem;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s;box-shadow:0 4px 15px rgba(255,105,180,0.3);white-space:nowrap;overflow:hidden;}
+.music-btn.playing{animation:musicPulse 1s ease-in-out infinite;}
+@keyframes musicPulse{0%,100%{box-shadow:0 4px 15px rgba(255,105,180,0.3);}50%{box-shadow:0 4px 25px rgba(255,105,180,0.7);}}
+.rain-hearts{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.rain-heart{position:absolute;top:-60px;font-size:var(--size);animation:rainDown var(--dur) linear infinite;animation-delay:var(--delay);opacity:0.7;}
+@keyframes rainDown{0%{transform:translateY(0);opacity:0;}10%{opacity:0.7;}90%{opacity:0.5;}100%{transform:translateY(110vh);opacity:0;}}
+.container{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:2rem 1.5rem 4rem;text-align:center;}
+.hero{margin-bottom:2rem;}
+.jar-bounce{font-size:4rem;display:block;margin-bottom:0.5rem;animation:jarFloat 2.5s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(255,77,109,0.4));}
+@keyframes jarFloat{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-15px) rotate(4deg);}}
+h1{font-family:'Playfair Display',serif!important;font-size:3rem!important;font-weight:600!important;color:#c9184a!important;-webkit-text-fill-color:#c9184a!important;background:none!important;text-shadow:2px 2px 0px rgba(255,255,255,0.5)!important;margin-bottom:0.8rem!important;}
+.subtitle{color:#6b1a30!important;font-size:1.05rem!important;line-height:1.6!important;margin-bottom:1rem!important;}
+.hearts-row{font-size:1.3rem;letter-spacing:0.3rem;margin:1rem 0 1.5rem;}
+.form-card{background:rgba(255,255,255,0.55)!important;backdrop-filter:blur(20px)!important;border:2px solid rgba(255,143,171,0.4)!important;border-radius:24px!important;padding:2rem!important;box-shadow:0 20px 60px rgba(201,24,74,0.15)!important;position:relative;}
+.card-deco{color:#ff8fab;font-size:0.9rem;letter-spacing:0.5rem;}
+.card-deco.top{margin-bottom:1.5rem;}
+.card-deco.bottom{margin-top:1.5rem;}
+.steps-list{text-align:left;margin:1.2rem 0;background:rgba(255,255,255,0.4);border-radius:14px;padding:1.2rem 1.5rem;border:1px solid rgba(255,143,171,0.3);}
+.steps-list p{padding:0.5rem 0;color:#6b1a30;font-size:0.95rem;border-bottom:1px solid rgba(255,143,171,0.2);display:flex;align-items:center;gap:0.6rem;}
+.steps-list p:last-child{border-bottom:none;}
+.step-num{width:24px;height:24px;background:rgba(201,24,74,0.15);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;color:#c9184a;flex-shrink:0;}
+.link-box{background:rgba(255,255,255,0.6);border:2px dashed rgba(255,77,109,0.4);border-radius:12px;padding:0.8rem 1rem;margin:1rem 0;display:flex;gap:0.5rem;align-items:center;}
+.link-box input{background:transparent;border:none;color:#c9184a;font-size:0.88rem;flex:1;padding:0;box-shadow:none;font-family:'DM Sans',sans-serif;}
+.link-box input:focus{outline:none;border:none;box-shadow:none;}
+.copy-btn{background:rgba(201,24,74,0.15);border:1px solid rgba(201,24,74,0.3);color:#c9184a;border-radius:8px;padding:0.4rem 0.8rem;font-size:0.82rem;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.copy-btn:hover{background:rgba(201,24,74,0.25);}
+.bear-status-box{background:rgba(255,255,255,0.4);border:1px solid rgba(255,143,171,0.3);border-radius:14px;padding:1.2rem;}
+.waiting-dots::after{content:'';animation:dots 1.5s steps(4,end) infinite;}
+@keyframes dots{0%{content:'';}25%{content:'.';}50%{content:'..';}75%{content:'...';}100%{content:'';}}
+.divider{display:flex;align-items:center;gap:1rem;margin:1.2rem 0;color:#a44a65;font-size:0.85rem;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,143,171,0.3);}
+.btn{display:block;background:linear-gradient(135deg,#ff4d6d 0%,#c9184a 100%);color:white;border:none;border-radius:50px;font-size:1rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all 0.3s;box-shadow:0 8px 25px rgba(201,24,74,0.4);}
+.btn:hover{transform:translateY(-2px);}
+.success-message{background:rgba(255,182,193,0.4);border:1.5px solid rgba(201,24,74,0.3);border-radius:12px;padding:1rem;margin:0.5rem 0;color:#c9184a;}
+.footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,143,171,0.3);color:#a44a65;font-size:0.85rem;line-height:1.6;}
+.footer a{color:#c9184a;text-decoration:none;}
+@keyframes promptBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
+</style>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+const allHearts=['❤️','🩷','💕','💗','💓','🌸','✨','💝','🌹','💞','💘'];
+const rainEl=document.getElementById('rainHearts');
+for(let i=0;i<30;i++){const h=document.createElement('div');h.className='rain-heart';h.innerHTML=allHearts[Math.floor(Math.random()*allHearts.length)];h.style.setProperty('--size',(Math.random()*22+10)+'px');h.style.setProperty('--dur',(Math.random()*6+5)+'s');h.style.setProperty('--delay',-(Math.random()*10)+'s');h.style.left=(Math.random()*100)+'%';rainEl.appendChild(h);}
+
+const songs=[document.getElementById('bgMusic1'),document.getElementById('bgMusic2')];
+const musicBtn=document.getElementById('musicBtn');
+let playing=false,currentSong=0;
+const songNames=['🎵 nothing holding me back','🎵 you and me'];
+function toggleMusic(){
+    if(!playing){songs[currentSong].src=songs[currentSong].src.replace('autoplay=0','autoplay=1');playing=true;musicBtn.textContent=songNames[currentSong];musicBtn.style.width='auto';musicBtn.style.padding='0 14px';musicBtn.style.fontSize='0.72rem';musicBtn.classList.add('playing');}
+    else{songs[currentSong].src=songs[currentSong].src.replace('autoplay=1','autoplay=0');currentSong=(currentSong+1)%2;playing=false;musicBtn.textContent='🎵';musicBtn.style.width='44px';musicBtn.style.padding='0';musicBtn.style.fontSize='1.2rem';musicBtn.classList.remove('playing');}
+}
+setTimeout(()=>{const p=document.createElement('div');p.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);border:2px solid rgba(255,143,171,0.5);border-radius:50px;padding:0.7rem 1.4rem;font-family:DM Sans,sans-serif;font-size:0.88rem;color:#c9184a;font-weight:600;cursor:pointer;z-index:200;box-shadow:0 8px 25px rgba(255,77,109,0.2);animation:promptBounce 1s ease-in-out infinite;white-space:nowrap;';p.textContent='🎵 tap for music 💗';p.onclick=()=>{toggleMusic();p.remove();};document.body.appendChild(p);},1000);
+
+function copyLink(){navigator.clipboard.writeText(document.getElementById('shareLinkInput').value).then(()=>{const btn=document.getElementById('copyLinkBtn');btn.textContent='copied ✓';setTimeout(()=>btn.textContent='copy 💗',2000);});}
+
+const code=document.getElementById('bearStatus').dataset.code;
+let bc=0;
+function checkBear(){fetch('/check-status/'+code).then(r=>r.json()).then(data=>{if(data.bear_sent){document.getElementById('bearStatus').innerHTML=`<div class="success-message">🐻 a teddy bear arrived!<br><small style="opacity:0.7;">sent on ${data.bear_sent_at}</small></div>`;}else{bc++;setTimeout(checkBear,bc<6?10000:30000);}}).catch(()=>setTimeout(checkBear,30000));}
+checkBear();
+
+let rc=0;
+function checkReply(){fetch('/check-status/'+code).then(r=>r.json()).then(data=>{if(data.reply){document.getElementById('replyStatus').innerHTML=`<div class="success-message">💌 they replied!<br><em style="font-family:'Playfair Display',serif;font-size:1rem;">"${data.reply}"</em><br><small style="opacity:0.7;">${data.reply_sent_at}</small></div>`;}else{rc++;setTimeout(checkReply,rc<6?10000:30000);}}).catch(()=>setTimeout(checkReply,30000));}
+checkReply();
+</script>
+</body>
+</html>

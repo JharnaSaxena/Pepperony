@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>not yet... ⏰💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="pink-world">
+<iframe id="bgMusic1" src="https://www.youtube.com/embed/0zoEjHwOUgo?autoplay=0&loop=1&playlist=0zoEjHwOUgo" style="display:none;" allow="autoplay"></iframe>
+<iframe id="bgMusic2" src="https://www.youtube.com/embed/CpbJO2Z6DA4?autoplay=0&loop=1&playlist=CpbJO2Z6DA4" style="display:none;" allow="autoplay"></iframe>
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+<div class="rain-hearts" id="rainHearts"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="container">
+    <div style="font-size:4rem;margin:2rem 0 1rem;animation:clockSpin 3s linear infinite;">⏰</div>
+    <h1>not yet...</h1>
+    <p class="subtitle">{{ message.sender_name }} scheduled this jar for a special moment.<br>come back at the right time 🌙</p>
+    <div class="form-card">
+        <div class="card-deco top">💗 · · · 💗</div>
+        <p style="color:#6b1a30;font-size:1.1rem;margin-bottom:0.5rem;">this jar opens on</p>
+        <p style="color:#c9184a;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;">{{ message.scheduled_for.strftime('%B %d, %Y') }}</p>
+        <p style="color:#a44a65;font-size:1rem;margin-top:0.3rem;">at {{ message.scheduled_for.strftime('%I:%M %p') }}</p>
+        <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px dashed rgba(255,143,171,0.4);">
+            <p style="color:#a44a65;font-style:italic;font-size:0.9rem;">the wait is part of the magic ✨</p>
+        </div>
+        <div class="card-deco bottom">💕 · · · 💕</div>
+    </div>
+    <div id="countdown" style="margin-top:1.5rem;color:#c9184a;font-size:1.1rem;font-weight:600;"></div>
+    <div class="footer"><p>made with 💗 and too much coffee</p></div>
+</div>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body.pink-world{font-family:'DM Sans',sans-serif;background:linear-gradient(160deg,#ffe0ec 0%,#ffc2d4 30%,#ffb3c6 60%,#ff8fab 100%);min-height:100vh;color:#6b1a30;}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:0.5;}
+.blob1{width:400px;height:400px;background:#ff8fab;top:-100px;left:-100px;animation:blobMove 8s ease-in-out infinite;}
+.blob2{width:350px;height:350px;background:#ffccd5;bottom:-80px;right:-80px;animation:blobMove 10s ease-in-out infinite reverse;}
+@keyframes blobMove{0%,100%{transform:scale(1) translate(0,0);}33%{transform:scale(1.1) translate(20px,-20px);}66%{transform:scale(0.95) translate(-15px,15px);}}
+.music-btn{position:fixed;top:16px;right:16px;z-index:100;background:rgba(255,255,255,0.7);border:2px solid #ff8fab;border-radius:22px;width:44px;height:44px;font-size:1.2rem;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s;white-space:nowrap;overflow:hidden;}
+.music-btn.playing{animation:musicPulse 1s ease-in-out infinite;}
+@keyframes musicPulse{0%,100%{box-shadow:0 4px 15px rgba(255,105,180,0.3);}50%{box-shadow:0 4px 25px rgba(255,105,180,0.7);}}
+.rain-hearts{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.rain-heart{position:absolute;top:-60px;font-size:var(--size);animation:rainDown var(--dur) linear infinite;animation-delay:var(--delay);opacity:0.7;}
+@keyframes rainDown{0%{transform:translateY(0);opacity:0;}10%{opacity:0.7;}100%{transform:translateY(110vh);opacity:0;}}
+.container{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:2rem 1.5rem 4rem;text-align:center;}
+h1{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:600;color:#c9184a;margin-bottom:0.5rem;}
+.subtitle{color:#6b1a30;font-size:1rem;line-height:1.6;margin-bottom:1.5rem;font-style:italic;}
+.form-card{background:rgba(255,255,255,0.55);backdrop-filter:blur(20px);border:2px solid rgba(255,143,171,0.4);border-radius:24px;padding:2rem;box-shadow:0 20px 60px rgba(201,24,74,0.15);}
+.card-deco{color:#ff8fab;font-size:0.9rem;letter-spacing:0.5rem;}
+.card-deco.top{margin-bottom:1.5rem;}
+.card-deco.bottom{margin-top:1.5rem;}
+.footer{margin-top:3rem;color:#a44a65;font-size:0.85rem;}
+@keyframes clockSpin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes promptBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
+</style>
+<script>
+const allHearts=['❤️','🩷','💕','💗','💓','🌸','✨','💝'];
+const rainEl=document.getElementById('rainHearts');
+for(let i=0;i<25;i++){const h=document.createElement('div');h.className='rain-heart';h.innerHTML=allHearts[Math.floor(Math.random()*allHearts.length)];h.style.setProperty('--size',(Math.random()*20+10)+'px');h.style.setProperty('--dur',(Math.random()*6+5)+'s');h.style.setProperty('--delay',-(Math.random()*10)+'s');h.style.left=(Math.random()*100)+'%';rainEl.appendChild(h);}
+const songs=[document.getElementById('bgMusic1'),document.getElementById('bgMusic2')];
+const musicBtn=document.getElementById('musicBtn');
+let playing=false,currentSong=0;
+const songNames=['🎵 nothing holding me back','🎵 you and me'];
+function toggleMusic(){
+    if(!playing){songs[currentSong].src=songs[currentSong].src.replace('autoplay=0','autoplay=1');playing=true;musicBtn.textContent=songNames[currentSong];musicBtn.style.width='auto';musicBtn.style.padding='0 14px';musicBtn.style.fontSize='0.72rem';musicBtn.classList.add('playing');}
+    else{songs[currentSong].src=songs[currentSong].src.replace('autoplay=1','autoplay=0');currentSong=(currentSong+1)%2;playing=false;musicBtn.textContent='🎵';musicBtn.style.width='44px';musicBtn.style.padding='0';musicBtn.style.fontSize='1.2rem';musicBtn.classList.remove('playing');}
+}
+setTimeout(()=>{const p=document.createElement('div');p.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);border:2px solid rgba(255,143,171,0.5);border-radius:50px;padding:0.7rem 1.4rem;font-family:DM Sans,sans-serif;font-size:0.88rem;color:#c9184a;font-weight:600;cursor:pointer;z-index:200;box-shadow:0 8px 25px rgba(255,77,109,0.2);animation:promptBounce 1s ease-in-out infinite;white-space:nowrap;';p.textContent='🎵 tap for music 💗';p.onclick=()=>{toggleMusic();p.remove();};document.body.appendChild(p);},1000);
+const openAt=new Date("{{ message.scheduled_for.strftime('%Y-%m-%dT%H:%M:%S') }}");
+function updateCountdown(){const diff=openAt-new Date();if(diff<=0){location.reload();return;}const d=Math.floor(diff/86400000),hh=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);document.getElementById('countdown').textContent=(d>0?d+'d ':'')+hh+'h '+m+'m '+s+'s until it opens 💕';}
+updateCountdown();setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
