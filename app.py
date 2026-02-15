@@ -32,9 +32,9 @@ PRESET_MESSAGES = {
     "romantic": [
         "I would choose you in every lifetime.",
         "You feel like home.",
-        "loving you feels effortless.",
-        "my heart recognized yours instantly.",
-        "you are my always.",
+        "Loving you feels effortless.",
+        "Ny heart recognized yours instantly.",
+        "You are my always.",
         "in a world of chaos, you are my peace.",
         "every love song makes sense now.",
         "you are my once-in-a-lifetime.",
