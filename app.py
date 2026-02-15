@@ -20,14 +20,14 @@ db = SQLAlchemy(app)
 
 PRESET_MESSAGES = {
     "flirty": [
-        "if smiles were crimes, you'd be serving life 😉",
-        "is it hot in here or is it just you?",
-        "you + me = dangerously cute energy.",
-        "i blame you for my stupid grin.",
-        "stop being so attractive, it's distracting.",
-        "careful. i bite. softly.",
-        "you are my favorite distraction.",
-        "my heart did a little backflip. rude.",
+        "If smiles were crimes, you'd be serving life 😉",
+        "Is it hot in here or is it just you?",
+        "You + me = dangerously cute energy.",
+        "I blame you for my stupid grin.",
+        "Stop being so attractive, it's distracting.",
+        "Careful. i bite. softly.",
+        "You are my favorite distraction.",
+        "My heart did a little backflip. rude.",
     ],
     "romantic": [
         "i would choose you in every lifetime.",
