@@ -30,8 +30,8 @@ PRESET_MESSAGES = {
         "My heart did a little backflip. rude.",
     ],
     "romantic": [
-        "i would choose you in every lifetime.",
-        "you feel like home.",
+        "I would choose you in every lifetime.",
+        "You feel like home.",
         "loving you feels effortless.",
         "my heart recognized yours instantly.",
         "you are my always.",
