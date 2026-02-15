@@ -230,12 +230,12 @@ def view_jar(code):
     db.session.commit()
 
     style_emojis = {
-        'flirty':      '😉💋🔥',
-        'romantic':    '🌹💕✨',
-        'warm':        '☀️🧸🤗',
-        'apology':     '🥺💙🌧️',
-        'missing_you': '🌙💭💌',
-        'grateful':    '🙏💖✨'
+        'flirty':      '💋🔥',
+        'romantic':    '💕✨',
+        'warm':        '☀️🧸',
+        'apology':     '🥺💙',
+        'missing_you': '🌙💌',
+        'grateful':    '💖✨'
     }
     style_intros = {
         'flirty':      "psst... someone couldn't resist:",
