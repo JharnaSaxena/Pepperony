@@ -35,9 +35,9 @@ PRESET_MESSAGES = {
         "Loving you feels effortless.",
         "Ny heart recognized yours instantly.",
         "You are my always.",
-        "in a world of chaos, you are my peace.",
-        "every love song makes sense now.",
-        "you are my once-in-a-lifetime.",
+        "In a world of chaos, you are my peace.",
+        "Every love song makes sense now.",
+        "You are my once-in-a-lifetime.",
     ],
     "warm": [
         "i hope you know how loved you are.",
